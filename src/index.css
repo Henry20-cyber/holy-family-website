@@ -1,0 +1,504 @@
+
+@import "tailwindcss";
+
+@theme {
+  /* Approved brand palette: ivory 60 / Marian blue 30 / cardinal red 10 */
+  --color-ivory: #F7F3ED;
+  --color-marian: #2D6CC0;
+  --color-crimson: #B82035;
+
+  /* Supporting tints and shades only — no additional accent colour */
+  --color-burgundy: #6B2938;
+  --color-pale-blue: #ECF2FA;
+
+  --font-heading: "Cormorant Garamond", "Times New Roman", serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-sacred: 0 24px 60px -42px rgb(45 108 192 / 0.55);
+}
+
+/* ========================================
+   GLOBAL RESET AND BASE
+======================================== */
+
+:root {
+  --header-height: 82px;
+
+  font-family: var(--font-body);
+  color: var(--color-marian);
+  background: var(--color-ivory);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-optical-sizing: auto;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-height) + 20px);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  min-height: 100svh;
+  overflow-x: hidden;
+  background: var(--color-ivory);
+}
+
+body,
+button,
+input,
+textarea,
+select {
+  font-family: var(--font-body);
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  cursor: pointer;
+}
+
+img,
+video,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  background: var(--color-crimson);
+  color: white;
+}
+
+/* Visible focus for every interactive element.
+   The crimson outline marks the control; the white halo keeps it
+   legible when the control sits on a Marian Blue surface. */
+:where(a, button, [role="button"], input, textarea, select, summary):focus-visible {
+  outline: 2px solid var(--color-crimson);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px rgb(255 255 255 / 0.9);
+}
+
+/* ========================================
+   LAYOUT UTILITIES
+======================================== */
+
+.container-main {
+  width: min(100% - 40px, 1180px);
+  margin-inline: auto;
+}
+
+.container-narrow {
+  width: min(100% - 40px, 880px);
+  margin-inline: auto;
+}
+
+/* Balanced vertical spacing for all sections */
+.section-padding {
+  padding-block: clamp(52px, 6vw, 88px);
+}
+
+.section-padding-sm {
+  padding-block: clamp(38px, 4.5vw, 64px);
+}
+
+.page-hero {
+  padding-block: clamp(42px, 5.5vw, 76px);
+}
+
+/* The homepage hero is viewport-conscious but never forced to 100vh */
+.home-hero {
+  display: flex;
+  align-items: center;
+  min-height: min(calc(100svh - var(--header-height)), 780px);
+  padding-block: clamp(38px, 5vh, 68px);
+}
+
+/* ========================================
+   TYPOGRAPHY
+======================================== */
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  color: var(--color-crimson);
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 26px;
+  height: 1px;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+.eyebrow-light {
+  color: white;
+}
+
+.heading-serif {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.022em;
+  text-wrap: balance;
+}
+
+/* ========================================
+   BUTTONS
+======================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  min-height: 48px;
+  padding: 0 26px;
+
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  border: 1px solid transparent;
+
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.btn svg {
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.btn:hover svg {
+  transform: translateX(3px);
+}
+
+.btn-primary {
+  background: var(--color-crimson);
+  border-color: var(--color-crimson);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--color-burgundy);
+  border-color: var(--color-burgundy);
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  border-color: rgb(45 108 192 / 0.3);
+  color: var(--color-marian);
+}
+
+.btn-outline:hover {
+  background: var(--color-marian);
+  border-color: var(--color-marian);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.btn-light {
+  border-color: rgb(255 255 255 / 0.35);
+  color: white;
+}
+
+.btn-light:hover {
+  background: white;
+  border-color: white;
+  color: var(--color-marian);
+  transform: translateY(-2px);
+}
+
+.btn-marian {
+  background: var(--color-marian);
+  border-color: var(--color-marian);
+  color: white;
+}
+
+.btn-marian:hover {
+  background: var(--color-burgundy);
+  border-color: var(--color-burgundy);
+  transform: translateY(-2px);
+}
+
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  color: var(--color-crimson);
+
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  transition: color 0.25s ease;
+}
+
+.text-link:hover {
+  color: var(--color-marian);
+}
+
+.text-link svg {
+  transition: transform 0.25s ease;
+}
+
+.text-link:hover svg {
+  transform: translate(2px, -2px);
+}
+
+/* ========================================
+   CARDS AND DECORATION
+======================================== */
+
+.card-sacred {
+  background: white;
+  border: 1px solid rgb(45 108 192 / 0.12);
+  box-shadow: 0 1px 0 rgb(45 108 192 / 0.04);
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.card-sacred:hover {
+  transform: translateY(-3px);
+  border-color: rgb(184 32 53 / 0.35);
+  box-shadow: var(--shadow-sacred);
+}
+
+/* Kept in the components layer so page-level text utilities can override
+   the ornament colour on blue surfaces. */
+@layer components {
+  .ornament {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--color-crimson);
+  }
+
+  .ornament::before,
+  .ornament::after {
+    content: "";
+    width: 38px;
+    height: 1px;
+    background: currentColor;
+  }
+
+  .ornament-diamond {
+    width: 7px;
+    height: 7px;
+    border: 1px solid currentColor;
+    transform: rotate(45deg);
+  }
+}
+
+.paper-lines {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 35px,
+    rgb(45 108 192 / 0.1) 35px,
+    rgb(45 108 192 / 0.1) 36px
+  );
+}
+
+.footer-pattern {
+  background-image:
+    radial-gradient(circle at 12% 15%, rgb(255 255 255 / 0.08), transparent 32%),
+    radial-gradient(circle at 88% 85%, rgb(184 32 53 / 0.16), transparent 30%);
+}
+
+/* ========================================
+   IMAGE PLACEHOLDERS
+   Ready to be replaced with real photography.
+======================================== */
+
+.placeholder-image {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(circle at 24% 18%, rgb(45 108 192 / 0.14), transparent 38%),
+    radial-gradient(circle at 80% 82%, rgb(236 242 250 / 0.95), transparent 42%),
+    linear-gradient(135deg, #f5f8fc 0%, #eaf0f8 100%);
+
+  color: var(--color-marian);
+}
+
+.placeholder-image::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgb(45 108 192 / 0.14);
+  pointer-events: none;
+}
+
+.placeholder-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 58%, rgb(45 108 192 / 0.16));
+  pointer-events: none;
+}
+
+.placeholder-image > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ========================================
+   SKIP LINK
+======================================== */
+
+.skip-link {
+  position: fixed;
+  left: 16px;
+  top: -100px;
+  z-index: 100;
+  background: var(--color-marian);
+  color: white;
+  padding: 12px 18px;
+  font-size: 12px;
+  font-weight: 600;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+/* ========================================
+   TABLETS AND SHORT LAPTOPS
+======================================== */
+
+@media (max-width: 1024px) {
+  .home-hero {
+    min-height: auto;
+    padding-block: 44px;
+  }
+}
+
+@media (max-height: 760px) and (min-width: 1024px) {
+  .home-hero {
+    min-height: auto;
+    padding-block: 32px;
+  }
+
+  .section-padding {
+    padding-block: 52px;
+  }
+
+  .page-hero {
+    padding-block: 36px;
+  }
+}
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 768px) {
+  .container-main,
+  .container-narrow {
+    width: min(100% - 32px, 1180px);
+  }
+
+  .section-padding {
+    padding-block: 44px;
+  }
+
+  .section-padding-sm {
+    padding-block: 36px;
+  }
+
+  .page-hero {
+    padding-block: 40px;
+  }
+
+  .eyebrow {
+    font-size: 9px;
+    letter-spacing: 0.16em;
+  }
+
+  .heading-serif {
+    line-height: 1.1;
+  }
+
+  .btn {
+    min-height: 46px;
+    padding-inline: 20px;
+  }
+
+  .placeholder-image::before {
+    inset: 9px;
+  }
+}
+
+/* ========================================
+   SMALL MOBILE
+======================================== */
+
+@media (max-width: 480px) {
+  .container-main,
+  .container-narrow {
+    width: calc(100% - 28px);
+  }
+
+  .section-padding {
+    padding-block: 38px;
+  }
+}
+
+/* ========================================
+   REDUCED MOTION ACCESSIBILITY
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .card-sacred:hover,
+  .btn:hover {
+    transform: none;
+  }
+}
